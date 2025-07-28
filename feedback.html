@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Feedback Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-100 text-gray-800 min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white shadow-2xl rounded-2xl p-6 w-full max-w-xl">
+        <h1 class="text-2xl font-bold mb-4 text-center text-blue-600">Project Feedback Form</h1>
+
+        <form id="feedbackForm" class="space-y-4">
+            <!-- Name -->
+            <div>
+                <label class="block font-medium">Your Name</label>
+                <input type="text" id="name" required
+                    class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
+            </div>
+
+            <!-- HTML Feedback -->
+            <div>
+                <label class="block font-medium"> Kya website mobile aur desktop dono par properly work karti
+                    hai?</label>
+                <select id="htmlFeedback" class="w-full mt-1 px-4 py-2 border rounded-lg">
+                    <option value="select">Select</option>
+                    <option>Excellent</option>
+                    <option>Good</option>
+                    <option>Average</option>
+                    <option>Mobile par Thik se dikhri nahi </option>
+                </select>
+            </div>
+
+            <!-- Tailwind Feedback -->
+            <div>
+                <label class="block font-medium"></label>
+                <select id="tailwindFeedback" class="w-full mt-1 px-4 py-2 border rounded-lg">
+                    <option value="select">Select</option>
+                    <option>Haan, use kiya lekin zyada useful nahi laga</option>
+                    <option>Haan, maine use kiya aur helpful laga</option>
+                    <option>Nahi, abhi tak try nahi kiya</option>
+                </select>
+            </div>
+
+            <!-- JS Feedback -->
+            <div>
+                <label class="block font-medium">Kya upcoming events ki list clear thi?</label>
+                <select id="jsFeedback" class="w-full mt-1 px-4 py-2 border rounded-lg">
+                    <option value="select">Select</option>
+                    <option>Haan, chahiye</option>
+                    <option>Mujhe fark nahi padta</option>
+                    <option>Nahi chahiye</option>
+                </select>
+            </div>
+
+            <!-- Extra Comments -->
+            <div>
+                <label class="block font-medium">Any Suggestions?</label>
+                <textarea id="comments" rows="3" class="w-full mt-1 px-4 py-2 border rounded-lg"></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit"
+                class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">Submit
+                Feedback</button>
+        </form>
+
+        <div id="thankYouMessage" class="hidden mt-4 text-green-600 font-semibold text-center">Thank you for your
+            feedback!</div>
+    </div>
+
+</body>
+
+</html>
+<script src="script.js"></script>

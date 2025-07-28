@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Campus Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-50">
+    <!-- Main Container -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div
+            class="sidebar fixed top-0 left-0 h-full bg-white shadow-lg z-40 transform -translate-x-full md:translate-x-0 md:relative md:shadow-none transition-transform duration-300 ease-in-out">
+            <!-- Logo -->
+            <div class="p-4 flex items-center space-x-2 border-b">
+                <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                    <i class="fas fa-graduation-cap text-xl"></i>
+                </div>
+                <span class="logo-text text-xl font-bold text-gray-800">Smart Campus</span>
+            </div>
+
+            <!-- User Profile -->
+            <div class="p-4 flex items-center space-x-3 border-b">
+                <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnFRPx77U9mERU_T1zyHcz9BOxbDQrL4Dvtg&s" alt="Profile"
+                        class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <p class="font-medium text-gray-800"><span id="displayUsername">User</span></p>
+                    <p class="text-xs text-gray-500">Student</p>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex-1 overflow-y-auto py-2">
+                <div class="px-2 space-y-1">
+                    <a href="#" class="flex items-center px-4 py-3 text-gray-700 rounded-lg mx-2 active-nav-item">
+                        <i class="fas fa-home text-blue-500 w-6"></i>
+                        <span class="nav-text ml-3">Dashboard</span>
+                    </a>
+                    <a href="Timetable.html"
+                        class="flex items-center px-4 py-3 text-gray-700 rounded-lg mx-2 hover:bg-gray-100">
+                        <i class="fas fa-calendar-alt text-blue-500 w-6"></i>
+                        <span onclick="showTimetable()" class="nav-text ml-3">Timetable</span>
+                    </a>
+                    <a href="#" class="flex items-center px-4 py-3 text-gray-700 rounded-lg mx-2 hover:bg-gray-100">
+                        <i class="fas fa-book text-blue-500 w-6"></i>
+                        <span class="nav-text ml-3">Study Materials</span>
+                    </a>
+                    <a href="#" class="flex items-center px-4 py-3 text-gray-700 rounded-lg mx-2 hover:bg-gray-100">
+                        <i class="fas fa-tasks text-blue-500 w-6"></i>
+                        <span class="nav-text ml-3">Assignments</span>
+                    </a>
+                    <a href="result.html"
+                        class="flex items-center px-4 py-3 text-gray-700 rounded-lg mx-2 hover:bg-gray-100">
+                        <i class="fas fa-chart-line text-blue-500 w-6"></i>
+                        <span class="nav-text ml-3">Results & GPA</span>
+                    </a>
+                    <a href="Ai Tool.html"
+                        class="flex items-center px-4 py-3 text-gray-700 rounded-lg mx-2 hover:bg-gray-100">
+                        <i class="fas fa-robot text-blue-500 w-6"></i>
+                        <span class="nav-text ml-3">AI Tools</span>
+                    </a>
+                    <a href="event.html"
+                        class="flex items-center px-4 py-3 text-gray-700 rounded-lg mx-2 hover:bg-gray-100">
+                        <i class="fas fa-calendar-check text-blue-500 w-6"></i>
+                        <span class="nav-text ml-3">Events</span>
+                    </a>
+                    <a href="feedback.html" class="flex items-center px-4 py-3 text-gray-700 rounded-lg mx-2 hover:bg-gray-100">
+                        <i class="fas fa-comment-alt text-blue-500 w-6"></i>
+                        <span class="nav-text ml-3">Feedback</span>
+                    </a>
+                </div>
+
+                <!-- Admin Section (visible only to admins) -->
+                <div class="px-2 mt-6 border-t pt-4">
+                    <p class="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Admin Panel</p>
+                    <div class="mt-2 space-y-1">
+                        <a href="#" class="flex items-center px-4 py-3 text-gray-700 rounded-lg mx-2 hover:bg-gray-100">
+                            <i class="fas fa-users text-blue-500 w-6"></i>
+                            <span class="nav-text ml-3">Manage Users</span>
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-gray-700 rounded-lg mx-2 hover:bg-gray-100">
+                            <i class="fas fa-cog text-blue-500 w-6"></i>
+                            <span class="nav-text ml-3">Settings</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+
+
+
+            <!-- Collapse Button -->
+            <div class="p-4 border-t">
+                <button onclick="toggleSidebar()"
+                    class="w-full flex items-center justify-center text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-chevron-left"></i>
+                    <span class="nav-text ml-2">Collapse</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content flex-1 overflow-y-auto">
+            <!-- Top Navigation -->
+            <header class="bg-white shadow-sm">
+                <div class="px-4 py-3 flex justify-between items-center">
+                    <div class="flex items-center space-x-4">
+                        <button class="text-gray-500 focus:outline-none lg:hidden" onclick="toggleMobileSidebar()">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                        <h1 class="text-xl font-semibold text-gray-800">Dashboard</h1>
+                    </div>
+
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <button class="text-gray-500 focus:outline-none">
+                                <i class="fas fa-bell text-xl"></i>
+                            </button>
+                            <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                        </div>
+                        <div class="relative">
+                            <button class="text-gray-500 focus:outline-none">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </button>
+                            <span class="absolute top-0 right-0 w-2 h-2 bg-blue-500 rounded-full"></span>
+                        </div>
+                        <div class="relative">
+                            <button onclick="toggleProfileDropdown()"
+                                class="flex items-center space-x-2 focus:outline-none">
+                                <div class="w-8 h-8 rounded-full bg-gray-200 overflow-hidden">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnFRPx77U9mERU_T1zyHcz9BOxbDQrL4Dvtg&s"
+                                        alt="Profile" class="w-full h-full object-cover">
+                                </div>
+                            </button>
+                            <!-- Profile Dropdown -->
+                            <div id="profileDropdown"
+                                class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+                                <a href="#" onclick="logout()" id="logoutLink"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    Welcome <span id="displayUsername"></span> 👋 (Logout)</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="p-4 md:p-6">
+                <!-- Welcome Banner -->
+                <div class="gradient-bg text-white rounded-xl p-6 mb-6 shadow-md">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold mb-2">Welcome back, Sarah!</h2>
+                            <p class="opacity-90">You have 2 new assignments and 1 upcoming event this week.</p>
+                        </div>
+                        <button
+                            class="mt-4 md:mt-0 bg-white text-blue-600 px-4 py-2 rounded-lg font-medium hover:bg-opacity-90 transition">
+                            View Notifications
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 card-hover transition">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">Today's Classes</p>
+                                <p class="text-2xl font-bold mt-1">3</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                                <i class="fas fa-calendar-day text-blue-500 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 card-hover transition">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">Pending Assignments</p>
+                                <p class="text-2xl font-bold mt-1">2</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
+                                <i class="fas fa-tasks text-purple-500 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 card-hover transition">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">Upcoming Events</p>
+                                <p class="text-2xl font-bold mt-1">1</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
+                                <i class="fas fa-calendar-check text-green-500 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 card-hover transition">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">Current GPA</p>
+                                <p class="text-2xl font-bold mt-1">3.8</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center">
+                                <i class="fas fa-star text-yellow-500 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Left Column -->
+                    <div class="lg:col-span-2 space-y-6">
+                        <!-- Timetable Section -->
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-semibold text-lg">Today's Schedule</h3>
+                                <a href="Timetable.html" class="text-blue-500 text-sm">View Full Timetable</a>
+
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th
+                                                class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Time</th>
+                                            <th
+                                                class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Subject</th>
+                                            <th
+                                                class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Faculty</th>
+                                            <th
+                                                class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Room</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        <tr>
+                                            <td class="px-4 py-3 whitespace-nowrap">09:00 - 10:30</td>
+                                            <td class="px-4 py-3 whitespace-nowrap">Data Structures</td>
+                                            <td class="px-4 py-3 whitespace-nowrap">Dr. Smith</td>
+                                            <td class="px-4 py-3 whitespace-nowrap">B-204</td>
+                                        </tr>
+                                        <tr class="bg-blue-50">
+                                            <td class="px-4 py-3 whitespace-nowrap font-medium">10:45 - 12:15</td>
+                                            <td class="px-4 py-3 whitespace-nowrap font-medium">Algorithms</td>
+                                            <td class="px-4 py-3 whitespace-nowrap font-medium">Prof. Johnson</td>
+                                            <td class="px-4 py-3 whitespace-nowrap font-medium">A-102</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-3 whitespace-nowrap">13:30 - 15:00</td>
+                                            <td class="px-4 py-3 whitespace-nowrap">Database Systems</td>
+                                            <td class="px-4 py-3 whitespace-nowrap">Dr. Lee</td>
+                                            <td class="px-4 py-3 whitespace-nowrap">C-301</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Assignments Section -->
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-semibold text-lg">Recent Assignments</h3>
+                                <a href="#" class="text-blue-500 text-sm">View All</a>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-start p-3 border border-gray-100 rounded-lg hover:bg-gray-50">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+                                            <i class="fas fa-file-alt text-red-500"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-3 flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <h4 class="font-medium">Data Structures Project</h4>
+                                            <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full">Due
+                                                Tomorrow</span>
+                                        </div>
+                                        <p class="text-sm text-gray-500 mt-1">Implement Binary Search Tree operations
+                                        </p>
+                                        <div class="flex items-center mt-2 text-xs text-gray-500">
+                                            <span class="flex items-center mr-3">
+                                                <i class="fas fa-calendar-alt mr-1"></i> Due: 15 May
+                                            </span>
+                                            <span class="flex items-center">
+                                                <i class="fas fa-book mr-1"></i> DS-101
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start p-3 border border-gray-100 rounded-lg hover:bg-gray-50">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                            <i class="fas fa-file-alt text-blue-500"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-3 flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <h4 class="font-medium">Database Design</h4>
+                                            <span
+                                                class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Due
+                                                in 3 days</span>
+                                        </div>
+                                        <p class="text-sm text-gray-500 mt-1">Design schema for library management
+                                            system</p>
+                                        <div class="flex items-center mt-2 text-xs text-gray-500">
+                                            <span class="flex items-center mr-3">
+                                                <i class="fas fa-calendar-alt mr-1"></i> Due: 18 May
+                                            </span>
+                                            <span class="flex items-center">
+                                                <i class="fas fa-book mr-1"></i> DB-202
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="space-y-6">
+                        <!-- Upcoming Events -->
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-semibold text-lg">Upcoming Events</h3>
+                                <a href="#" class="text-blue-500 text-sm">View All</a>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="p-3 bg-blue-50 rounded-lg">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 mt-1">
+                                            <div
+                                                class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                                <i class="fas fa-calendar-day text-blue-500"></i>
+                                            </div>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h4 class="font-medium">Tech Symposium 2023</h4>
+                                            <p class="text-sm text-gray-600 mt-1">Annual technology conference featuring
+                                                industry leaders</p>
+                                            <div class="flex items-center mt-2 text-xs text-gray-500">
+                                                <span class="flex items-center mr-3">
+                                                    <i class="fas fa-calendar-alt mr-1"></i> 20 May
+                                                </span>
+                                                <span class="flex items-center">
+                                                    <i class="fas fa-clock mr-1"></i> 10:00 AM
+                                                </span>
+                                            </div>
+                                            <button
+                                                class="mt-2 text-xs bg-blue-500 text-white px-3 py-1 rounded-full hover:bg-blue-600">
+                                                Register Now
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-3 border border-gray-100 rounded-lg">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 mt-1">
+                                            <div
+                                                class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                                                <i class="fas fa-graduation-cap text-purple-500"></i>
+                                            </div>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h4 class="font-medium">Career Fair</h4>
+                                            <p class="text-sm text-gray-600 mt-1">Meet top employers and explore
+                                                internship opportunities</p>
+                                            <div class="flex items-center mt-2 text-xs text-gray-500">
+                                                <span class="flex items-center mr-3">
+                                                    <i class="fas fa-calendar-alt mr-1"></i> 25 May
+                                                </span>
+                                                <span class="flex items-center">
+                                                    <i class="fas fa-clock mr-1"></i> 9:00 AM
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick AI Tools -->
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                            <h3 class="font-semibold text-lg mb-4">AI Tools</h3>
+                            <div class="grid grid-cols-2 gap-3">
+                                <button onclick="openAITool('summarizer')"
+                                    class="flex flex-col items-center p-3 border border-gray-100 rounded-lg hover:bg-blue-50 hover:border-blue-100 transition">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mb-2">
+                                        <i class="fas fa-file-pdf text-blue-500"></i>
+                                    </div>
+                                    <span class="text-xs font-medium text-center">PDF Summarizer</span>
+                                </button>
+                                <button onclick="openAITool('doubt')"
+                                    class="flex flex-col items-center p-3 border border-gray-100 rounded-lg hover:bg-purple-50 hover:border-purple-100 transition">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mb-2">
+                                        <i class="fas fa-question-circle text-purple-500"></i>
+                                    </div>
+                                    <span class="text-xs font-medium text-center">Doubt Assistant</span>
+                                </button>
+                                <button onclick="openAITool('video')"
+                                    class="flex flex-col items-center p-3 border border-gray-100 rounded-lg hover:bg-red-50 hover:border-red-100 transition">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mb-2">
+                                        <i class="fab fa-youtube text-red-500"></i>
+                                    </div>
+                                    <span class="text-xs font-medium text-center">Video Summarizer</span>
+                                </button>
+                                <button onclick="openAITool('plagiarism')"
+                                    class="flex flex-col items-center p-3 border border-gray-100 rounded-lg hover:bg-green-50 hover:border-green-100 transition">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mb-2">
+                                        <i class="fas fa-copy text-green-500"></i>
+                                    </div>
+                                    <span class="text-xs font-medium text-center">Plagiarism Check</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Recent Announcements -->
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-semibold text-lg">Announcements</h3>
+                                <a href="#" class="text-blue-500 text-sm">View All</a>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-yellow-50 rounded-lg">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 mt-1">
+                                            <div
+                                                class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center">
+                                                <i class="fas fa-exclamation-triangle text-yellow-500 text-sm"></i>
+                                            </div>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h4 class="text-sm font-medium">Library Closure</h4>
+                                            <p class="text-xs text-gray-600 mt-1">Main library will be closed on 17th
+                                                May for maintenance.</p>
+                                            <span class="text-xs text-gray-500 mt-1">Posted: 2 hours ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-3 rounded-lg">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 mt-1">
+                                            <div
+                                                class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                                <i class="fas fa-info-circle text-blue-500 text-sm"></i>
+                                            </div>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h4 class="text-sm font-medium">Exam Schedule</h4>
+                                            <p class="text-xs text-gray-600 mt-1">Final exam schedule has been
+                                                published. Check your portal.</p>
+                                            <span class="text-xs text-gray-500 mt-1">Posted: 1 day ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- AI Tool Modal -->
+    <div id="aiToolModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl w-full max-w-md mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="p-4 border-b flex justify-between items-center">
+                <h3 id="modalTitle" class="font-semibold text-lg">AI Tool</h3>
+                <button onclick="closeAITool()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-4" id="modalContent">
+                <!-- Content will be loaded here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div id="mobileSidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"
+        onclick="toggleMobileSidebar()"></div>
+
+    <script src="script.js">
+    </script>
+    <script>
+        showUsername();  // Optional, only where needed (like dashboard)
+    </script>
+</body>
+
+</html>
